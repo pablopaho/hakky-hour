@@ -31,3 +31,9 @@ snapshots/
 
 # Log files
 *.log
+
+# sbt-koan
+.koan*
+
+# CourseGen
+.tag
