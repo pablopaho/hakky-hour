@@ -1,0 +1,4 @@
+hakky-hour
+==========
+
+Akka training
