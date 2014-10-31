@@ -38,13 +38,6 @@ class HakkyHourApp(system: ActorSystem) extends Terminal {
 
   private val hakkyHour = createHakkyHour()
 
-  system.actorOf(Props(new Actor {
-    hakkyHour ! "Nice bar!"
-    override def receive: Actor.Receive = {
-      case _ => log.info("response")
-    }
-  }))
-
   def run(): Unit = {
     log.warning(f"{} running%nEnter commands into the terminal, e.g. `q` or `quit`", getClass.getSimpleName)
     commandLoop()
@@ -72,7 +65,12 @@ class HakkyHourApp(system: ActorSystem) extends Terminal {
     }
 
   protected def createGuest(count: Int, drink: Drink, maxDrinkCount: Int): Unit =
-    () // TODO Send CreateGuest to HakkyHour count number of times
+    {
+      for (i <- 1 to count) {
+        log.info(s"mandando mensajes Gest i")
+        hakkyHour ! HakkyHour.CreateGuest
+      }
+    } // TODO Send CreateGuest to HakkyHour count number of times
 
   protected def getStatus(): Unit =
     () // TODO Ask HakkyHour for the status and log the result on completion
