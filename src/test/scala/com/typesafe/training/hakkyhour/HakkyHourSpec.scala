@@ -14,12 +14,16 @@ class HakkyHourSpec extends BaseAkkaSpec {
         system.actorOf(HakkyHour.props)
       }
     }
+    """result in creating a child actor with name "waiter"""" in {
+      system.actorOf(HakkyHour.props, "create-waiter")
+      TestProbe().expectActor("/user/create-waiter/waiter")
+    }
   }
 
   "Sending CreateGuest to HakkyHour" should {
     "result in creating a Guest" in {
       val hakkyHour = system.actorOf(HakkyHour.props, "create-guest")
-      hakkyHour ! HakkyHour.CreateGuest
+      hakkyHour ! HakkyHour.CreateGuest(Drink.Akkarita)
       TestProbe().expectActor("/user/create-guest/$*")
     }
   }

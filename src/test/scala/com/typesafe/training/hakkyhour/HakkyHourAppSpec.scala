@@ -40,7 +40,7 @@ class HakkyHourAppSpec extends BaseAkkaSpec with ConversionCheckedTripleEquals {
         createGuest(2, Drink.Akkarita, Int.MaxValue)
         override def createHakkyHour() = probe.ref
       }
-      probe.receiveN(2) shouldEqual List.fill(2)(HakkyHour.CreateGuest)
+      probe.receiveN(2) shouldEqual List.fill(2)(HakkyHour.CreateGuest(Drink.Akkarita))
     }
   }
 }
